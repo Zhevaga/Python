@@ -4,14 +4,14 @@
 a = int(input())
 b = int(input())
 max_num = a
-max_sum = 0
-summa = 0
+max_total = 0
+total = 0
 for i in range(a, b + 1):
     for j in range(1, i + 1):
         if i % j == 0:
-            summa += j
-    if max_sum <= summa:
-        max_sum = summa
+            total += j
+    if max_total <= total:
+        max_total = total
         max_num = i
-    summa = 0
-print(max_num, max_sum)
+    total = 0
+print(max_num, max_total)
