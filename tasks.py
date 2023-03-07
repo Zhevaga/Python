@@ -59,3 +59,46 @@ for i in range(n):
         continue
     else:
         print(k_word[k-1], end='')
+
+"""На вход программе подается натуральное число n, затем n строк, затем еще 
+одна строка — поисковый запрос. Напишите программу, которая выводит все введенные 
+строки, в которых встречается поисковый запрос. Примечание. Поиск не должен быть 
+чувствителен к регистру символов."""
+n = int(input())
+my_list = []
+for i in range(n):
+    my_list.append(input())
+search = input()
+for word in my_list:
+    if search.lower() in word.lower():
+        print(word)
+
+"""На вход программе подается натуральное число n, затем n строк, затем число 
+k — количество поисковых запросов, затем k строк — поисковые запросы. 
+Напишите программу, которая выводит все введенные строки, в которых встречаются
+все поисковые запросы."""
+n = int(input())
+my_list = []
+search_list = []
+for i in range(n):
+    my_list.append(input())
+k = int(input())
+for j in range(k):
+    search_list.append(input().lower())
+for string in my_list:
+    for word in search_list:
+        if word not in string.lower():
+            break
+    else:
+        print(string)
+
+"""На вход программе подается строка текста, содержащая 4 целых числа 
+разделенных точкой. Напишите программу, которая определяет является ли введенная
+ строка текста корректным ip-адресом."""
+ip = input()
+for num in ip.split('.'):
+    if int(num) < 0 or 255 < int(num):
+        print('НЕТ')
+        break
+else:
+    print('ДА')
