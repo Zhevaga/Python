@@ -102,3 +102,48 @@ for num in ip.split('.'):
         break
 else:
     print('ДА')
+
+"""На первой строке вводится символ решётки и сразу же натуральное число 
+n — количество строк в программе, не считая первой. Далее следует 
+n строк кода. Нужно вывести те же строки, но удалить комментарии и 
+символы пустого пространства в конце строк. Пустую строку вместо 
+первой строки ввода выводить не надо.
+Sample Input:
+
+#12
+print("Введите своё имя")
+name = input()
+print("Введите пароль, если имеется")    # ахахахах вам не поймать меня
+password = input()
+if password == "hoover":
+    print("Здравствуйте, рыцарь", name)         #долой Макнамару
+elif password == "noncr":
+    print("Здравствуйте, паладин", name)
+elif password == "gelios":
+    print("Здравствуйте, старейшина", name)          #Элайджа вперёд
+else:
+    print("Здравствуйте, послушник", name)
+Sample Output:
+
+print("Введите своё имя")
+name = input()
+print("Введите пароль, если имеется")
+password = input()
+if password == "hoover":
+    print("Здравствуйте, рыцарь", name)
+elif password == "noncr":
+    print("Здравствуйте, паладин", name)
+elif password == "gelios":
+    print("Здравствуйте, старейшина", name)
+else:
+    print("Здравствуйте, послушник", name)"""
+num = input().split('#')
+count_string = int(num[1])
+my_code = []
+for i in range(count_string):
+    string = input()
+    if '#' in string:
+        index = string.find('#')
+        print(string[:index].rstrip())
+    else:
+        print(string)
