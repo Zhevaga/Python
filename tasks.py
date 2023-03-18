@@ -166,3 +166,85 @@ if [len(i) for i in tel] == [3, 3, 4] and ''.join(tel).isdigit():
     print('YES')
 else:
     print('NO')
+
+"""На вход программе подается число n, а затем n строк, содержащих целые числа в порядке возрастания. 
+Из данных строк формируются списки чисел. Напишите программу, которая объединяет указанные списки 
+в один отсортированный список с помощью функции quick_merge(), а затем выводит его."""
+def quick_merge(list_num): 
+    for i in range(len(list_num)):
+        num = list_num[i]
+        for j in range(len(num)):
+            num[j] = int(num[j])        
+        
+    i = len(list_num) - 1
+    list1 = list_num[i]
+    list2 = list_num[i - 1]
+    while 0 < i:
+        result = []
+        p1 = 0  
+        p2 = 0 
+
+        while p1 < len(list1) and p2 < len(list2):  
+            if list1[p1] <= list2[p2]:
+                result.append(list1[p1])
+                p1 += 1
+            else:
+                result.append(list2[p2])
+                p2 += 1
+        if p1 < len(list1):   
+            result += list1[p1:]
+        if p2 < len(list2):
+            result += list2[p2:]
+        i -= 1
+        list1 = result
+        list2 = list_num[i - 1]
+    return result
+ 
+
+n = int(input())
+list_num = [input().split() for _ in range(n)]    
+
+print(*quick_merge(list_num))
+
+"""Напишите функцию get_next_prime(num), которая принимает в качестве 
+аргумента натуральное число num и возвращает первое простое число большее 
+числа num."""
+def is_prime(num):
+    if num == 1:
+        return  False
+    for i in range(2, int(num ** 0.5) + 1):
+        if num % i == 0:
+            return False
+    else:
+        return True
+    
+def get_next_prime(num):
+    num += 1
+    while not is_prime(num):
+        num += 1
+    return num
+
+n = int(input())
+
+print(get_next_prime(n))
+
+"""Напишите функцию is_password_good(password), которая принимает в качестве
+ аргумента строковое значение пароля password и возвращает значение True,
+ если пароль является надежным и False в противном случае.
+
+Пароль является надежным если:
+1. его длина не менее 8 символов; 
+2. он содержит как минимум одну заглавную букву (верхний регистр); 
+3. он содержит как минимум одну строчную букву (нижний регистр);
+4. он содержит хотя бы одну цифру.
+5. не содржит символы"""
+
+def is_password_good(password):
+    if 8 <= len(password) and password.isalnum() and not password.isalpha() and not password.isdigit() and not password.islower() and not password.isupper():
+        return True
+    else:
+        return False
+
+txt = input()
+
+print(is_password_good(txt))
