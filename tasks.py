@@ -248,3 +248,74 @@ def is_password_good(password):
 txt = input()
 
 print(is_password_good(txt))
+
+"""Действительный пароль BEEGEEK банка имеет вид a:b:c, где a, b и c – 
+натуральные числа. Поскольку основатель BEEGEEK фанатеет от математики, то он решил:
+1. число a – должно быть палиндромом;
+2. число b – должно быть простым;
+3. число c – должно быть четным.
+
+Напишите функцию is_valid_password(password), которая принимает в качестве 
+аргумента строковое значение пароля password и возвращает значение True,
+ если пароль является действительным паролем BEEGEEK банка и False 
+ в противном случае."""
+def is_valid_password(password):
+    password = password.split(':')
+    a, b, c = password[0], int(password[1]), int(password[2])
+    Flag = True
+    if len(password) != 3:
+        Flag = False
+    else:
+        if c % 2 != 0:
+            Flag = False
+        else:
+            for i in range(2, int(b ** 0.5) + 1):
+                if b % i == 0 or b == 1:
+                    Flag = False
+                else:
+                    if a != a[::-1]:
+                        Flag = False
+    return Flag
+
+psw = input()
+print(is_valid_password(psw))
+
+"""Напишите функцию number_to_words(num), которая принимает в качестве аргумента
+натуральное число num и возвращает его словесное описание на русском языке.
+Примечание 1. Считайте, что число 1≤num ≤99."""
+
+def number_to_words(num):
+    num19 = ['ноль', 'один', 'два', 'три', 'четыре', 'пять', 'шесть', 'семь', 'восемь', 'девять', 'десять', 'одиннадцать', 'двенадцать', 'тринадцать', 'четырнадцать', 'пятнадцать', 'шестнадцать', 'семнадцать', 'восемнадцать', 'девятнадцать']
+    num90 = ['двадцать', 'тридцать', 'сорок', 'пятьдесят', 'шестьдесят', 'семьдесят', 'восемьдесят', 'девяносто']
+    if num < 20:
+        return num19[num]
+    else:
+        whole = num90[num // 10 - 2]
+        if num % 10 == 0:
+            return whole
+        else:
+            string = whole + ' ' + num19[num % 10]
+            return string
+        
+
+n = int(input())
+print(number_to_words(n))
+
+"""Панграмма – это фраза, содержащая в себе все буквы алфавита. Обычно панграммы 
+используют для презентации шрифтов, чтобы можно было в одной фразе рассмотреть все 
+глифы.
+Напишите функцию, is_pangram(text) которая принимает в качестве аргумента строку 
+текста на английском языке и возвращает значение True если текст является панграммой
+и False в противном случае.
+Примечание 1. Гарантируется, что введенная строка содержит только буквы 
+английского алфавита."""
+def is_pangram(text):
+    alphabet = 'abcdefghijklmnoprqwtyuszxv'
+    for i in range(len(text)):
+        char = text[i].lower()
+        if char in alphabet:
+            alphabet = alphabet.replace(char, ' ')
+    return alphabet.isspace()
+        
+text = input()
+print(is_pangram(text))
