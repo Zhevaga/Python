@@ -96,3 +96,44 @@ def cipher():
 
 
 cipher()
+
+
+'''Другая версия:
+На вход программе подается строка текста на английском языке,
+в которой нужно зашифровать все слова. Каждое слово строки следует
+зашифровать с помощью шифра Цезаря (циклического сдвига на длину
+этого слова). Строчные буквы при этом остаются строчными,
+а прописные – прописными.'''
+language = 'abcdefghijklmnopqrstuvwxyz'
+text = input()
+
+words = text.split()
+new_words = []
+for i in range(len(words)):
+    word = words[i]
+    new_word = ''
+    for j in range(len(word)):
+        if word[j].isalpha():
+            new_word += word[j]
+    new_words.append(new_word)
+
+list_cipher = []
+for i in range(len(words)):
+    word = words[i]
+    cipher = ''
+    for j in range(len(word)):
+        if word[j].isalpha():
+            index = language.find(word[j].lower())
+            new_index = index + len(new_words[i])
+            if len(language) - 1 < new_index:
+                new_index -= len(language)
+            if word[j] == language[index].upper():
+                char = language[new_index].upper()
+            else:
+                char = language[new_index]
+            cipher += char
+        else:
+            cipher += word[j]
+    list_cipher.append(cipher)
+
+print(' '.join(list_cipher))
