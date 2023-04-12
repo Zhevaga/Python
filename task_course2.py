@@ -46,3 +46,57 @@ for i in range(n):
     for j in range(i + 1):
         print(list1[i][j], end=' ')
     print('')
+
+"""Напишите программу, которая поворачивает квадратную матрицу чисел на
+90 градусов по часовой стрелке."""
+n = int(input())
+matrix = []
+
+for i in range(n):
+    num = [j for j in input().split()]
+    matrix.append(num)
+    
+new_matrix = []
+for i in range(n):
+    new_row = []
+    for j in range(n - 1, -1, -1):
+        elem = matrix[j][i]
+        new_row.append(elem)
+    new_matrix.append(new_row)
+
+for i in range(n):
+    for j in range(n):
+        print(new_matrix[i][j], end=' ')
+    print()
+
+"""На шахматной доске 8×8 стоит конь. Напишите программу, которая отмечает
+положение коня на доске и все клетки, которые бьет конь. Клетку, где стоит
+конь, отметьте английской буквой N, клетки, которые бьет конь, отметьте
+символами *, остальные клетки заполните точками.
+
+Формат входных данных
+На вход программе подаются координаты коня на шахматной доске в шахматной
+нотации (то есть в виде e4, где сначала записывается номер столбца
+(буква от a до h, слева направо), затем номеру строки (цифра от
+1 до 8, снизу вверх))."""
+
+index = input()
+i = 8 - int(index[1])
+j = ord(index[0]) - 97
+matrix = []
+
+for k in range(8):
+    elem = ['.' for _ in range(8)]
+    matrix.append(elem)
+    
+matrix[i][j] = 'N'
+
+for h in range(8):
+    for g in range(8):
+        if abs(h - i) == 2 and abs(g - j) == 1 or abs(g - j) == 2 and abs(h - i) == 1:
+            matrix[h][g] = '*'
+
+for c in range(8):
+    for r in range(8):
+        print((matrix[c][r]), end=' ')
+    print()
