@@ -312,3 +312,25 @@ for _ in range(m - 1):
 
 for row in matrix1:
     print(*row)
+
+"""На вход программе подается строка текста, содержащая числа. Для каждого
+числа выведите слово YES (в отдельной строке), если это число ранее
+встречалось в последовательности или NO, если не встречалось."""
+my_set = set()
+string = input().split()
+for i in string:
+    if int(i) in my_set:
+        print('YES')
+    else:
+        print('NO')
+        my_set.add(int(i))
+
+"""Даны оценки по математике трёх учеников в 10-балльной шкале. Напишите
+программу, которая выводит такие оценки, которые встречаются не более, чем у
+двух учеников."""
+a = set([int(i) for i in input().split()])
+b = set([int(i) for i in input().split()])
+c = set([int(i) for i in input().split()])
+my_set = (a | b | c) - (a & b & c)
+
+print(*sorted(my_set))
