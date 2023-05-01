@@ -334,3 +334,69 @@ c = set([int(i) for i in input().split()])
 my_set = (a | b | c) - (a & b & c)
 
 print(*sorted(my_set))
+
+"""Программа должна вывести закодированное с помощью кода Морзе сообщение,
+оставляя пробел между каждым закодированным символом (последовательностью тире
+и точек). Ваша программа должна игнорировать любые символы, не
+перечисленные в таблице."""
+letters = [c for c in 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789']
+morse = ['.-', '-...', '-.-.', '-..', '.', '..-.', '--.', '....', '..',
+         '.---', '-.-', '.-..', '--', '-.', '---', '.--.', '--.-', '.-.',
+         '...', '-', '..-', '...-', '.--', '-..-', '-.--', '--..', '-----',
+         '.----', '..---', '...--', '....-', '.....', '-....', '--...',
+         '---..', '----.']
+
+m_dict = dict(zip(letters, morse))
+
+for digit in input().upper():
+    if digit in m_dict:
+        print(m_dict[digit], end=' ')
+
+"""Вам доступен список pets, содержащий информацию о собаках и их владельцах.
+Каждый элемент списка – это кортеж вида (кличка собаки, имя владельца, фамилия
+владельца, возраст владельца).
+Дополните приведенный код так, чтобы в переменной result хранился словарь,
+в котором для каждого владельца будут перечислены его собаки. Ключом словаря
+должен быть кортеж (имя, фамилия, возраст владельца), а значением – список
+кличек собак (сохранив исходный порядок следования)."""
+pets = [('Hatiko', 'Parker', 'Wilson', 50),
+        ('Rusty', 'Josh', 'King', 25),
+        ('Fido', 'John', 'Smith', 28),
+        ('Butch', 'Jake', 'Smirnoff', 18),
+        ('Odi', 'Emma', 'Wright', 18),
+        ('Balto', 'Josh', 'King', 25),
+        ('Barry', 'Josh', 'King', 25),
+        ('Snape', 'Hannah', 'Taylor', 40),
+        ('Horry', 'Martha', 'Robinson', 73),
+        ('Giro', 'Alex', 'Martinez', 65),
+        ('Zooma', 'Simon', 'Nevel', 32),
+        ('Lassie', 'Josh', 'King', 25),
+        ('Chase', 'Martha', 'Robinson', 73),
+        ('Ace', 'Martha', 'Williams', 38),
+        ('Rocky', 'Simon', 'Nevel', 32)]
+
+result = {}
+
+for owner in pets:
+    result[owner[1:]] = result.get(owner[1:], [])
+
+for owner in result:
+    result[owner] = [couple[0] for couple in pets if couple[1:] == owner]
+
+# другой вариант
+for pet in pets:
+    result.setdefault(pet[1:], []).append(pet[0])
+
+"""На вход программе подается строка, содержащая строки-идентификаторы.
+Напишите программу, которая исправляет их так, чтобы в результирующей строке
+не было дубликатов. Для этого необходимо прибавлять к повторяющимся
+идентификаторам постфикс _n, где n – количество раз, сколько такой
+идентификатор уже встречался."""
+string = input().split()
+my_dict = {}
+for letter in string:
+    if letter in my_dict:
+        print(f'{letter}_{result[letter]}', end=' ')
+    else:
+        print(letter, end=' ')
+    result[letter] = result.get(letter, 0) + 1
