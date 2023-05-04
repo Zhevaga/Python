@@ -454,3 +454,54 @@ for letter in word:
     for m_key, m_value in my_dict.items():
         if word_dict[letter] == m_value:
             print(m_key, end='')
+
+"""Словарь emails содержит информацию об электронных адресах пользователей,
+сгруппированных по домену. Дополните приведенный код, чтобы он вывел все
+электронные адреса в алфавитном порядке, каждый на отдельной строке,
+в формате username@domain."""
+
+emails = {'nosu.edu': ['timyr', 'joseph', 'svetlana.gaeva', 'larisa.mamuk'],
+          'gmail.com': ['ruslan.chaika', 'rustam.mini', 'stepik-best'],
+          'msu.edu': ['apple.fruit', 'beegeek', 'beegeek.school'],
+          'yandex.ru': ['surface', 'google'],
+          'hse.edu': ['tomas-henders', 'cream.soda', 'zivert'],
+          'mail.ru': ['angel.down', 'joanne', 'the.fame.moster']}
+
+list_e = [name + '@' + key for key, value in emails.items() for name in value]
+
+print(*sorted(list_e), sep='\n')
+
+"""На вход программе подается число n — количество строк в базе данных
+о продажах интернет-магазина. Далее следует n строк с записями вида покупатель
+товар количество, где покупатель — имя покупателя (строка без пробелов),
+товар — название товара (строка без пробелов), количество — количество
+приобретенных единиц товара (натуральное число).
+Программа должна вывести список всех покупателей в лексикографическом порядке,
+после имени каждого покупателя — двоеточие, затем список названий всех
+приобретенных им товаров в лексикографическом порядке, после названия каждого
+товара — количество единиц товара. Информация о каждом товаре выводится на
+отдельной строке."""
+list_b = []
+for _ in range(int(input())):
+    string = input().split()
+    list_b.append(string)
+
+result = {}
+for owner in list_b:
+    result.setdefault(owner[0], []).append(owner[1:])
+
+
+for key, value in result.items():
+    new = {}
+    for thing in value:
+        new.setdefault(thing[0], []).append(int(thing[1]))
+    for thing, count2 in new.items():
+        new[thing] = sum(count2)
+    result[key] = dict(sorted(new.items()))
+
+s_result = dict(sorted(result.items()))
+
+for key, value in s_result.items():
+    print(key + ':')
+    for k, l in value.items():
+        print(k, l)
