@@ -505,3 +505,25 @@ for key, value in s_result.items():
     print(key + ':')
     for k, l in value.items():
         print(k, l)
+
+"""На вход программе в первой строке подается число n – общее количество
+учеников. Далее идут n строк, содержащих имена и фамилии учеников.
+Программа должна вывести имя и фамилию ученика (в соответствии с исходным
+порядком) и имя и фамилию его тайного друга, разделённые дефисом.
+Обратите внимание, что нельзя быть тайным другом самому себе и
+нельзя быть тайным другом для нескольких учеников."""
+from random import choice
+list_sender = [input() for _ in range(int(input()))]
+
+list_recipient = []
+for person in list_sender:
+    while True:
+        name = choice(list_sender)
+        if name != person and name not in list_recipient:
+            list_recipient.append(name)
+            break
+
+couple = dict(zip(list_sender, list_recipient))
+
+for sender, recipient in couple.items():
+    print(f'{sender} - {recipient}')
