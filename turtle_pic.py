@@ -1,5 +1,5 @@
 import turtle
-from random import randint, choice
+from random import randint, choice, randrange
 
 # snow
 turtle.Screen().setup(600, 600)
@@ -75,3 +75,61 @@ def square(count, side):
 c = int(input())
 s = int(input())
 square(c, s)
+
+# moon gif
+turtle.Screen().bgcolor('blue')
+
+moon = turtle.Turtle()
+moon.hideturtle()
+moon.dot(100, 'orange')
+
+cl = turtle.Turtle()
+cl.shape('circle')
+cl.hideturtle()
+cl.pencolor('blue')
+cl.pensize(100)
+
+while True:
+    cl.penup()
+    cl.goto(100, 0)
+    cl.pendown()
+
+    for _ in range(200):
+        cl.backward(1)
+        cl._tracer(2, 0)
+        cl.clear()
+
+
+# stars by click
+def random_color():
+    return randrange(256), randrange(256), randrange(256)
+
+
+def star(x, y):
+    turtle.goto(x, y)
+
+    color = random_color()
+    size = (randrange(10, 50, 5))
+    turtle.left(randrange(0, 360, 10))
+
+    turtle.pencolor(color)
+    turtle.fillcolor(color)
+    turtle.begin_fill()
+    turtle.penup()
+    for _ in range(5):
+        turtle.forward(size)
+        turtle.left(144)
+    turtle.end_fill()
+
+
+def left_mouse_click(x, y):
+    star(x, y)
+
+
+turtle.hideturtle()
+turtle.speed(0)
+turtle.penup()
+
+turtle.Screen().bgcolor('black')
+turtle.Screen().onclick(left_mouse_click)
+turtle.Screen().listen()
