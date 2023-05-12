@@ -1,5 +1,18 @@
 import turtle
 from random import randint, choice, randrange
+from math import sqrt, tan, radians, sin, cos, pi
+
+# heart
+turtle.penup()
+turtle.fillcolor('red')
+turtle.begin_fill()
+t = 0
+while t < 2 * pi:
+    x = 128 * sin(t) ** 3
+    y = 8 * (13 * cos(t) - 5 * cos(2 * t) - 2 * cos(3 * t) - cos(4 * t) - 5)
+    turtle.goto(x, y)
+    t += 0.01
+turtle.end_fill()
 
 # snow
 turtle.Screen().setup(600, 600)
@@ -109,16 +122,17 @@ def star(x, y):
     turtle.goto(x, y)
 
     color = random_color()
-    size = (randrange(10, 50, 5))
+    size = (randrange(20, 70, 5))
     turtle.left(randrange(0, 360, 10))
 
     turtle.pencolor(color)
     turtle.fillcolor(color)
     turtle.begin_fill()
     turtle.penup()
-    for _ in range(5):
+    count = randrange(5, 20, 2)
+    for _ in range(count):
         turtle.forward(size)
-        turtle.left(144)
+        turtle.left(180 - (180 / count))
     turtle.end_fill()
 
 
@@ -133,3 +147,92 @@ turtle.penup()
 turtle.Screen().bgcolor('black')
 turtle.Screen().onclick(left_mouse_click)
 turtle.Screen().listen()
+
+"""Напишите программу, которая рисует изображение правильных многоугольников
+по образцу. Многоугольники должны иметь разный цвет. Площадь всех
+многоугольников была одинаковой."""
+# import turtle as t
+# from math import *
+# from random import randrange
+
+
+# def random_color():
+#    return randrange(256), randrange(256), randrange(256)
+
+
+def figure():
+    n = randrange(3, 8)
+    a = sqrt((s * 100 * 4 * tan(radians(180) / n)) / n)
+    g = 360 / n
+    color = random_color()
+
+    turtle.fillcolor(color)
+    turtle.begin_fill()
+    for _ in range(n):
+        turtle.forward(int(a))
+        turtle.right(g)
+    turtle.forward(int(a))
+    turtle.end_fill()
+
+
+def picture():
+    turtle.penup()
+    turtle.goto(-250, 250)
+    turtle.pendown()
+    for _ in range(5):
+        y = turtle.ycor()
+        for _ in range(5):
+            figure()
+            turtle.penup()
+            turtle.forward(s)
+            turtle.pendown()
+        turtle.penup()
+        turtle.goto(-250, y - s * 2)
+        turtle.pendown()
+
+
+s = int(input())
+
+turtle.Screen().setup(600, 600)
+picture()
+
+# chess_board
+# import turtle
+# from math import sqrt
+colors = ('white', 'black')
+
+
+def square(size_square, color, y):
+    turtle.fillcolor(colors[color])
+    turtle.begin_fill()
+    for _ in range(4):
+        turtle.forward(size_square)
+        turtle.left(90)
+    if y != 4:
+        turtle.forward(size_square)
+    turtle.end_fill()
+
+
+def row(size_square, count):
+    for y in range(5):
+        color = (count + y) % 2
+        square(size_square, color, y)
+
+
+def chess_board(size_bord):
+    turtle.penup()
+    turtle.goto(-100, 100)
+    turtle.pendown()
+    size_square = sqrt(size_bord) / 5
+    for i in range(5):
+        y = turtle.ycor()
+        count = (i + 1) % 2
+        row(size_square, count)
+        turtle.penup()
+        turtle.goto(-100, y - size_square)
+        turtle.pendown()
+
+
+turtle.Screen().setup(400, 400)
+size_bord = int(input('Какая площадь доски тебе нужна?\n'))
+chess_board(size_bord)
