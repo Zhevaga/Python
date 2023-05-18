@@ -530,3 +530,29 @@ couple = dict(zip(list_sender, list_recipient))
 
 for sender, recipient in couple.items():
     print(f'{sender} - {recipient}')
+
+"""Напишите функцию print_products(), которая принимает произвольное
+количество аргументов и выводит список продуктов (любая непустая строка)
+по образцу: <номер продукта>) <название продукта> (нумерация продуктов
+начинается с единицы). Если среди переданных аргументов нет ни одного продукта,
+необходимо вывести текст Нет продуктов."""
+
+
+def print_products(*args):
+    products = [a for a in args if type(a) == str and a.isalpha()]
+    if products:
+        for i in range(len(products)):
+            print(f'{i + 1}) {products[i]}')
+    else:
+        print('Нет продуктов')
+
+
+"""Напишите функцию info_kwargs(), которая принимает произвольное количество
+именованных аргументов и печатает именованные аргументы в соответствии с
+образцом: <имя аргумента>: <значение аргумента>, при этом имена аргументов
+следуют в алфавитном порядке (по возрастанию)."""
+
+
+def info_kwargs(**kwargs):
+    for key, value in sorted(kwargs.items()):
+        print(f'{key}: {value}')
